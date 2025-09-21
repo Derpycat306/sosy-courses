@@ -40,22 +40,32 @@ const cy = cytoscape({
     name: "dagre",
     rankDir: "TB",
     ranker: "longest-path",
-    nodeSep: 120,
+    nodeSep: 150,
     rankSep: 180,
     edgeSep: 50,
   },
   style: [
     {
+      selector: "node",
+      style: {
+        "background-opacity": 0,   // fully transparent
+        "border-width": 0,
+        "width": 0.001,                // tiny hitbox
+        "height": 0.001,
+        "label": ""                // remove Cytoscape’s text label (we use HTML instead)
+      }
+    },
+    {
       selector: "edge",
       style: {
         width: 2,
-        "events": "no",
         "line-color": "#f3f3f3ff",
         "target-arrow-shape": "triangle",
         "target-arrow-color": "#0f0f0fff",
         "curve-style": "bezier",
         'arrow-scale': 2,
-        'width': 2
+        'width': 2,
+        "events": "no"
       }
     }
   ]
@@ -84,3 +94,28 @@ cy.nodeHtmlLabel([
     halign: "center"
   }
 ]);
+
+cy.nodes().forEach(node => {
+  node.lock();
+});
+
+cy.on("cxttap", "node", function (evt) {
+  const node = evt.target;
+
+  if (confirm(`Delete ${node.data("label")}?`)) {
+    cy.remove(node.connectedEdges());
+    cy.remove(node);
+
+    // Rerun the dagre layout after removal
+    cy.layout({
+      name: "dagre",
+      rankDir: "TB",        // top-to-bottom
+      ranker: "longest-path",
+      nodeSep: 120,
+      rankSep: 180,
+      edgeSep: 50,
+      animate: true,        // smooth transition
+      animationDuration: 500
+    }).run();
+  }
+});

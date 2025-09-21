@@ -37,7 +37,6 @@ const courses = [
   { label: "CMPT 495", group: "capstone", rank: 4 }
 ];
 
-
 // Prerequisite edges
 const prerequisites = [
   { to: "CMPT135", from: "CMPT130" },

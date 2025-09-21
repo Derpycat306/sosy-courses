@@ -45,6 +45,10 @@ h2 {
   text-align: center;
 }
 
+#legend p {
+  margin: 5px;
+}
+
 #legend div {
   display: flex;
   align-items: center;
