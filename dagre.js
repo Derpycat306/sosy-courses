@@ -40,19 +40,19 @@ const cy = cytoscape({
     name: "dagre",
     rankDir: "TB",
     ranker: "longest-path",
-    nodeSep: 150,
-    rankSep: 180,
+    nodeSep: 40,
+    rankSep: 100,
     edgeSep: 50,
   },
   style: [
     {
       selector: "node",
       style: {
-        "background-opacity": 0,   // fully transparent
-        "border-width": 0,
-        "width": 0.001,                // tiny hitbox
-        "height": 0.001,
-        "label": ""                // remove Cytoscape’s text label (we use HTML instead)
+        "width": 120,           // make the hitbox wider
+        "height": 34,           // make it taller
+        "background-opacity": 0, // hide the default background
+        "border-opacity": 0,
+        "shape": "round-rectangle",
       }
     },
     {
@@ -85,8 +85,7 @@ cy.nodeHtmlLabel([
       const url = d.url || "#";
       // inline styles ensure CSS won't accidentally override color choices
       return `<div class="course-node"
-                   style="background:${color}; color:${textColor};"
-                   onclick="window.open('${url}', '_blank')">
+                   style="background:${color}; color:${textColor};">
                 ${label}
               </div>`;
     },
@@ -94,10 +93,6 @@ cy.nodeHtmlLabel([
     halign: "center"
   }
 ]);
-
-cy.nodes().forEach(node => {
-  node.lock();
-});
 
 cy.on("cxttap", "node", function (evt) {
   const node = evt.target;
@@ -117,5 +112,13 @@ cy.on("cxttap", "node", function (evt) {
       animate: true,        // smooth transition
       animationDuration: 500
     }).run();
+  }
+});
+
+cy.on("tap", "node", function(evt) {
+  const node = evt.target;
+  const url = node.data("url");
+  if (url && url !== "#") {
+    window.open(url, "_blank");
   }
 });
