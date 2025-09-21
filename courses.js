@@ -14,7 +14,7 @@ const courses = [
   { label: "MATH 151", group: "lower", rank: 1 },
   { label: "MATH 152", group: "lower", rank: 1 },
   { label: "MATH 232", group: "lower", rank: 2 },
-  { label: "STAT271", group: "lower", rank: 2 },
+  { label: "STAT 271", group: "lower", rank: 2 },
   { label: "CMPT 303", group: "upper_four", rank: 3 },
   { label: "CMPT 307", group: "upper_all", rank: 3 },
   { label: "CMPT 354", group: "upper_four", rank: 3 },

@@ -21,16 +21,21 @@ h2 {
   font-weight: 600;
   color: black;
   text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  user-select: none;
 }
 
-.top{
+.top h2{
   position: absolute;
-  z-index: 1;
-  width: 100vw;
+  top: 0;
+  left: 50vw;
+  display: block;
 }
 
 #legend {
   float: left;
+  position: absolute;
+  top: 0;
+  left: 0;
   background: rgba(255,255,255,0.9);
   padding: 12px 16px;
   border-radius: 8px;
@@ -43,10 +48,12 @@ h2 {
   margin: 0 0 8px 0;
   font-size: 16px;
   text-align: center;
+  user-select: none;
 }
 
 #legend p {
   margin: 5px;
+  user-select: none;
 }
 
 #legend div {
@@ -54,6 +61,7 @@ h2 {
   align-items: center;
   margin: 4px 0;
   font-size: 14px;
+  user-select: none;
 }
 
 .color-box {
