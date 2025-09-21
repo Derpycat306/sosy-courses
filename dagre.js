@@ -84,24 +84,3 @@ cy.nodeHtmlLabel([
     halign: "center"
   }
 ]);
-
-cy.nodes().forEach(node => {
-  let dragTimeout = null;
-
-  node.on("grab", e => {
-    // prevent immediate drag
-    e.preventDefault();
-
-    // add a delay before enabling dragging
-    dragTimeout = setTimeout(() => {
-      node.unlock();   // allow dragging after delay
-    }, 200); // delay in ms
-  });
-
-  node.on("free", () => {
-    clearTimeout(dragTimeout);
-    node.lock(); // relock when not dragging
-  });
-
-  node.lock(); // lock by default
-});
