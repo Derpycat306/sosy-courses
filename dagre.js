@@ -48,8 +48,8 @@ const cy = cytoscape({
     {
       selector: "node",
       style: {
-        "width": 120,           // make the hitbox wider
-        "height": 34,           // make it taller
+        "width": 110,           // make the hitbox wider
+        "height": 22,           // make it taller
         "background-opacity": 0, // hide the default background
         "border-opacity": 0,
         "shape": "round-rectangle",
@@ -104,13 +104,11 @@ cy.on("cxttap", "node", function (evt) {
     // Rerun the dagre layout after removal
     cy.layout({
       name: "dagre",
-      rankDir: "TB",        // top-to-bottom
+      rankDir: "TB",
       ranker: "longest-path",
-      nodeSep: 120,
-      rankSep: 180,
+      nodeSep: 40,
+      rankSep: 100,
       edgeSep: 50,
-      animate: true,        // smooth transition
-      animationDuration: 500
     }).run();
   }
 });
