@@ -5,30 +5,27 @@
   <title>Course Prerequisite Map</title>
   <link rel="stylesheet" href="courses.css">
 
-  <!-- Cytoscape core & layout engine -->
+  <!-- Cytoscape -->
   <script src="https://unpkg.com/cytoscape/dist/cytoscape.min.js"></script>
   <script src="https://unpkg.com/dagre/dist/dagre.min.js"></script>
   <script src="https://unpkg.com/cytoscape-dagre/cytoscape-dagre.js"></script>
-
-
-  <!-- Extension to render HTML nodes -->
   <script src="https://unpkg.com/cytoscape-node-html-label/dist/cytoscape-node-html-label.js"></script>
+
 </head>
 <body>
-    
   <div id="legend">
     <h3>Legend</h3>
-    <p>left click for course page</p> 
+    <p>left click to view page</p> 
     <p style="margin-bottom: 15px">right click to remove</p>
   </div>
 
-  <h2>SoSy Course Map</h2>
+  <h2 id="header">SoSy Course Map</h2>
   
   <div id="cy"></div>
   
   <!-- Load data and logic -->
   <script src="courses.js"></script>
   <script src="colors.js"></script>
-  <script src="dagre.js"></script>
+  <script src="cyto.js"></script>
 </body>
 </html>
