@@ -45,3 +45,23 @@ function getContrastColor(hex) {
   const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
   return luminance > 0.65 ? "#000000" : "#ffffff";
 }
+
+const currentYear = new Date().getFullYear();
+const yearSelect = document.getElementById("yearSelect");
+const termSelect = document.getElementById("termSelect");
+
+// Example: show current year + next 3 years
+for (let y = currentYear; y <= currentYear + 3; y++) {
+  const opt = document.createElement("option");
+  opt.value = y;
+  opt.textContent = y;
+  yearSelect.appendChild(opt);
+}
+
+yearSelect.addEventListener("change", () => {
+  catalogYear = yearSelect.value;
+});
+
+termSelect.addEventListener("change", () => {
+  catalogTerm = termSelect.value;
+});

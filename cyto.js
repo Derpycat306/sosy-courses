@@ -1,8 +1,9 @@
-const catalogYear = "2025";
-const catalogTerm = "fall";
+catalogYear = "2025";
+catalogTerm = "fall";
 
 const cylayout = {
   name: "dagre",
+  rankDir: "TB",
   ranker: "tight-tree",
   nodeSep: 40,
   rankSep: 100,
@@ -30,7 +31,6 @@ const elements = [
     data: {
       id : c.label.replace(" ",""),
       label: c.label,
-      url: buildCourseUrl(c.label),
       color: c.color,   // explicit color (optional)
       group: c.group    // group name (optional)
     }
@@ -69,6 +69,8 @@ const cy = cytoscape({
   ]
 });
 
+loadGraph();
+
 cy.nodeHtmlLabel([
   {
     query: "node",
@@ -91,22 +93,41 @@ cy.nodeHtmlLabel([
   }
 ]);
 
+// remove node on right click
 cy.on("cxttap", "node", function (evt) {
   const node = evt.target;
-
-  if (confirm(`Delete ${node.data("label")}?`)) {
-    cy.remove(node.connectedEdges());
-    cy.remove(node);
-
-    // Rerun the dagre layout after removal
-    cy.layout(cylayout).run();
-  }
+  cy.remove(node.connectedEdges());
+  cy.remove(node);
+  cy.layout(cylayout).run();
 });
 
+// generate and follow link on click
 cy.on("tap", "node", function(evt) {
   const node = evt.target;
-  const url = node.data("url");
+  const url = buildCourseUrl(node.data("label"));
   if (url !== "#") {
     window.open(url, "_blank");
   }
 });
+
+function resetGraph() {
+  cy.elements().remove();
+  cy.add(elements);
+  cy.layout(cylayout).run();
+}
+
+function saveGraph() {
+  const elements = cy.elements().jsons(); // nodes + edges
+  localStorage.setItem("graphElements", JSON.stringify(elements));
+}
+
+function loadGraph() {
+  const saved = localStorage.getItem("graphElements");
+  if (saved) {
+    cy.elements().remove();
+    cy.add(JSON.parse(saved));
+  } else {
+    cy.add(elements); // your default dataset
+  }
+  cy.layout(cylayout).run();
+}

@@ -24,17 +24,20 @@ body {
   user-select: none;
 }
 
-#legend {
-  float: left;
+#legend, #tools {
   position: absolute;
   top: 0;
-  left: 0;
   background: rgba(255,255,255,0.9);
   padding: 12px 16px;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   font-family: sans-serif;
   z-index: 999;
+}
+
+#legend {
+  float: left;
+  left: 0;
 }
 
 #legend h3 {
@@ -55,6 +58,34 @@ body {
   margin: 4px 0;
   font-size: 14px;
   user-select: none;
+}
+
+#tools {
+  float: right;
+  right: 0;
+}
+
+#tools > *{
+  display: block;
+  margin: 10px 5px;
+}
+
+.btn{
+  border: 2px black solid;
+  border-radius: 15px;
+  padding: 10px;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn:hover{
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.btn:active{
+  transform: scale(0.92);
+  transition: all 0s ease-in-out;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
 .color-box {

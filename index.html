@@ -20,12 +20,36 @@
   </div>
 
   <h2 id="header">SoSy Course Map</h2>
+
+  <div id="tools">
+
+    <div>
+      <button id="reset" class="btn" onclick="resetGraph()">Reset</button>
+      <button id="save" class="btn" onclick="saveGraph()">Save</button>
+      <button id="load" class="btn" onclick="loadGraph()">Load</button>
+    </div>
+    
+
+    <div>
+      <label for="yearSelect">Year: </label>
+      <select id="yearSelect"></select>
+    </div>
+
+    <div>
+      <label for="termSelect">Term: </label>
+      <select id="termSelect">
+        <option value="fall">fall</option>
+        <option value="spring">spring</option>
+        <option value="summer">summer</option>
+      </select>
+    </div>
+  </div>
   
   <div id="cy"></div>
   
   <!-- Load data and logic -->
   <script src="courses.js"></script>
-  <script src="colors.js"></script>
+  <script src="misc.js"></script>
   <script src="cyto.js"></script>
 </body>
 </html>
