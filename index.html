@@ -13,29 +13,32 @@
 
 </head>
 <body>
+
+  <!-- Dynamic course group legend -->
   <div id="legend">
     <h3>Legend</h3>
     <p>left click to view page</p> 
     <p style="margin-bottom: 15px">right click to remove</p>
   </div>
 
-  <h2 id="header">SoSy Course Map</h2>
-
+  <!-- User interactive toolbox -->
   <div id="tools">
 
+    <h3>Toolbox</h2>
+
+    <!-- Layout control buttons -->
     <div>
-      <button id="reset" class="btn" onclick="resetGraph()">Reset</button>
-      <button id="save" class="btn" onclick="saveGraph()">Save</button>
-      <button id="load" class="btn" onclick="loadGraph()">Load</button>
+      <button id="reload" class="btn" onclick="reload()" data-tooltip="Re-run layout">Reload</button>
+      <button id="reset" class="btn" onclick="resetGraph()" data-tooltip="Reset to default">Reset</button>
+      <button id="save" class="btn" onclick="saveGraph()" data-tooltip="Save current graph">Save</button>
+      <button id="load" class="btn" onclick="loadGraph()" data-tooltip="Load saved layout">Load</button>
     </div>
     
-
+    <!-- Date selection for url generation -->
     <div>
       <label for="yearSelect">Year: </label>
       <select id="yearSelect"></select>
-    </div>
 
-    <div>
       <label for="termSelect">Term: </label>
       <select id="termSelect">
         <option value="fall">fall</option>
@@ -43,8 +46,10 @@
         <option value="summer">summer</option>
       </select>
     </div>
+
   </div>
   
+  <!-- Cytoscape graph container -->
   <div id="cy"></div>
   
   <!-- Load data and logic -->

@@ -31,16 +31,15 @@ const elements = [
     data: {
       id : c.label.replace(" ",""),
       label: c.label,
-      color: c.color,   // explicit color (optional)
-      group: c.group    // group name (optional)
+      group: c.group
     }
   })),
   ...prerequisites.map(p => ({ data: { source: p.from, target: p.to } }))
 ];
 
+// initialize cytoscape
 const cy = cytoscape({
   container: document.getElementById("cy"),
-  elements: elements,
   layout: cylayout,
   style: [
     {
@@ -69,15 +68,14 @@ const cy = cytoscape({
   ]
 });
 
-loadGraph();
-
+// html for the nodes
 cy.nodeHtmlLabel([
   {
     query: "node",
 
     tpl: function(nodeOrData) {
       const d = (typeof nodeOrData.data === "function") ? nodeOrData.data() : nodeOrData;
-      const color = d.color || (d.group && groupColors[d.group]) || "#e3f2fd";
+      const color = d.color || (d.group && groups[d.group].color) || "#e3f2fd";
       const border = d.borderColor || color;
       const textColor = d.textColor || getContrastColor(color);
       const label = d.label || "";
@@ -98,7 +96,6 @@ cy.on("cxttap", "node", function (evt) {
   const node = evt.target;
   cy.remove(node.connectedEdges());
   cy.remove(node);
-  cy.layout(cylayout).run();
 });
 
 // generate and follow link on click
@@ -110,24 +107,35 @@ cy.on("tap", "node", function(evt) {
   }
 });
 
-function resetGraph() {
-  cy.elements().remove();
-  cy.add(elements);
+function reload() {
   cy.layout(cylayout).run();
 }
 
+// reload all elements
+function resetGraph() {
+  cy.elements().remove();
+  cy.add(elements);
+  reload();
+}
+
+// save current elements and positions
 function saveGraph() {
   const elements = cy.elements().jsons(); // nodes + edges
   localStorage.setItem("graphElements", JSON.stringify(elements));
 }
 
+// load elements and positions from save
 function loadGraph() {
   const saved = localStorage.getItem("graphElements");
   if (saved) {
     cy.elements().remove();
     cy.add(JSON.parse(saved));
+    cy.fit(cy.elements(), 30);
   } else {
     cy.add(elements); // your default dataset
+    loadGraph();
   }
-  cy.layout(cylayout).run();
 }
+
+// auto load on startup
+loadGraph();

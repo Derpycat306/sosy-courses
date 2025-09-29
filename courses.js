@@ -1,6 +1,6 @@
-// Courses list for Software Systems Major (SFU), non-electives, with groups/colors
+// Courses list for Software Systems Major
 const courses = [
-  // Lower Division Requirements
+  // All courses
   { label: "CMPT 105W", group: "lower" },
   { label: "CMPT 130", group: "lower"},
   { label: "CMPT 135", group: "lower"},
@@ -115,3 +115,31 @@ const prerequisites = [
 
   { to: "CMPT495", from: "CMPT494" },
 ];
+
+// Course groupings
+const groups = {
+  lower: {
+    name: "Required Lower Division",
+    color: "#4caf50"
+  },
+  upper_all: {
+    name: "Required Upper Division",
+    color: "#2196f3"
+  },
+  upper_two: {
+    name: "Must Take 6 units",
+    color: "#fffb00ff"
+  },
+  upper_four: {
+    name: "Must Take 12 units",
+    color: "#ffc061ff"
+  },
+  capstone: {
+    name: "Capstone",
+    color: "#f44336"
+  },
+  null: {
+    name: "Prerequisite Only",
+    color: "#929292ff"
+  }
+};

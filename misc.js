@@ -1,34 +1,15 @@
-const groupColors = {
-  lower: "#4caf50",
-  upper_all: "#2196f3",
-  upper_two: "#fffb00ff",
-  upper_four: "#ffc061ff",
-  capstone: "#f44336",
-  null: "#929292ff"
-};
-
-const groupNames = {
-  lower: "Required Lower Division",
-  upper_all: "Required Upper Division",
-  upper_two: "Must Take 6 units",
-  upper_four: "Must Take 12 units",
-  capstone: "Capstone",
-  null: "Prerequisite Only"
-};
-
-// ---------- LEGEND ---------- //
-
 const legendContainer = document.getElementById("legend");
 
-for (const group in groupColors) {
+// auto generate legend items from groups
+for (const group in groups) {
   const item = document.createElement("div");
   item.className = "legend-item";
 
   const box = document.createElement("span");
   box.className = "color-box";
-  box.style.background = groupColors[group];
+  box.style.background = groups[group].color;
 
-  const label = document.createTextNode(groupNames[group] || group);
+  const label = document.createTextNode(groups[group].name || group);
 
   item.appendChild(box);
   item.appendChild(label);
